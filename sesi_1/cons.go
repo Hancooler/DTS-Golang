@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 func main(){
 	const full_name string = "aril"
@@ -36,6 +38,12 @@ func main() {
 	var wrong = false
 
 	var wrongAndRight = wrong && right
-	fmt
+	fmt.Printf("wrong && right \t(%t) \n", wrongAndRight)
+
+	var wrongOrRight = wrong || right
+	fmt.Printf("wrong || right \t(%t) \n", wrongOrRight)
+
+	var wrongReverse = !wrong
+	fmt.Printf("!wrong \t(%t) \n", wrongReverse)
 
 }
