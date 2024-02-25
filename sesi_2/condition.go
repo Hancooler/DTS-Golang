@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /* Condition (temporary variabel)
 func main() {
 	var currenyear = 2021
@@ -70,6 +68,7 @@ func main() {
 }
 */
 
+/* nested condition
 func main() {
 	var score = 10
 
@@ -93,3 +92,4 @@ func main() {
 		}
 	}
 }
+*/
