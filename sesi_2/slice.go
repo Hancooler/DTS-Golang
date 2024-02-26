@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"strings"
+)
+
 /* slice make function
 func main() {
 	var fruits = make([]string, 3)
@@ -63,3 +68,49 @@ func main() {
 	fmt.Printf("%#v\n", fruits5)
 }
 */
+
+/* combining slicing and append
+func main() {
+	var fruits1 = []string{"apple", "banana", "manggo", "durian", "pineaplle"}
+	fruits1 = append(fruits1[:3], "rambutan")
+	fmt.Printf("%#v\n", fruits1)
+}
+*/
+
+/*
+	slice backing array
+
+func main() {
+
+		var fruits1 = []string{"apple", "manggo", "durian", "banana", "starfruit"}
+
+		var fruits2 = fruits1[2:4]
+
+		fruits2[0] = "rambutan"
+
+		fmt.Println("fruit1 =>", fruits1)
+		fmt.Println("fruit2 =>", fruits2)
+	}
+*/
+func main() {
+	var fruit1 = []string{"apple", "manggo", "durian", "banana"}
+
+	fmt.Println("fruits1 cap:", cap(fruit1))
+	fmt.Println("fruits1 len:", len(fruit1))
+
+	fmt.Println(strings.Repeat("#", 20))
+
+	var fruit2 = fruit1[0:3]
+
+	fmt.Println("fruits2 cap:", cap(fruit2))
+	fmt.Println("fruits2 len:", len(fruit2))
+
+	fmt.Println(strings.Repeat("#", 20))
+
+	var fruit3 = fruit1[1:]
+
+	fmt.Println("fruits3 cap:", cap(fruit3))
+	fmt.Println("fruits3 len:", len(fruit3))
+
+	fmt.Println(strings.Repeat("#", 20))
+}
