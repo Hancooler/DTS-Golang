@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /* slice make function
 func main() {
 	var fruits = make([]string, 3)
@@ -48,6 +46,7 @@ func main() {
 }
 */
 
+/* slice slicing
 func main() {
 	var fruits1 = []string{"apple", "banana", "manggo", "durian", "pineaplle"}
 
@@ -63,3 +62,4 @@ func main() {
 	var fruits5 = fruits1[:]
 	fmt.Printf("%#v\n", fruits5)
 }
+*/
