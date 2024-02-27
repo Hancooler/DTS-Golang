@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 /* slice make function
@@ -92,6 +91,8 @@ func main() {
 		fmt.Println("fruit2 =>", fruits2)
 	}
 */
+
+/* slice cap function
 func main() {
 	var fruit1 = []string{"apple", "manggo", "durian", "banana"}
 
@@ -113,4 +114,16 @@ func main() {
 	fmt.Println("fruits3 len:", len(fruit3))
 
 	fmt.Println(strings.Repeat("#", 20))
+}
+*/
+
+func main() {
+	cars := []string{"ford", "honda", "audi", "rover"}
+	newcars := []string{}
+
+	newcars = append(newcars, cars[0:2]...)
+
+	cars[0] = "Nissan"
+	fmt.Println("cars:", cars)
+	fmt.Println("newcars", newcars)
 }
