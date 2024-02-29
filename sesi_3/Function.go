@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 /* function
@@ -86,22 +87,59 @@ func calculate(d float64) (area float64, circumference float64) {
 }
 */
 
-func main() {
-	studenlist := print("aril", "nanda", "nailo", "mikel", "marco")
+/*
+	Function variadic1
 
-	fmt.Printf("%v", studenlist)
+	func main() {
+		studenlist := print("aril", "nanda", "nailo", "mikel", "marco")
+
+		fmt.Printf("%v", studenlist)
 
 }
-func print(names ...string) []map[string]string {
-	var result []map[string]string
 
-	for i, v := range names {
-		key := fmt.Sprintf("student%d", i+1)
-		temp := map[string]string{
-			key: v,
+	func print(names ...string) []map[string]string {
+		var result []map[string]string
+
+		for i, v := range names {
+			key := fmt.Sprintf("student%d", i+1)
+			temp := map[string]string{
+				key: v,
+			}
+			result = append(result, temp)
+
 		}
-		result = append(result, temp)
-
+		return result
 	}
-	return result
+*/
+
+/* Function variadic2
+func main() {
+	numberlist := []int{1, 2, 3, 4, 5, 6, 7, 8}
+
+	result := sum(numberlist...)
+
+	fmt.Println("result", result)
+
+}
+
+func sum(numbers ...int) int {
+	var total int
+	for _, v := range numbers {
+		total += v
+	}
+	return total
+}
+*/
+
+func main() {
+	profile("aril", "pasta", "ayam goreng", "ikan bakar", "apel")
+
+}
+
+func profile(names string, favfood ...string) {
+
+	mergefavfood := strings.Join(favfood, ",")
+
+	fmt.Println("hello", names)
+	fmt.Println("my favorite food is", mergefavfood)
 }
