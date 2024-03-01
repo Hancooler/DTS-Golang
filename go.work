@@ -3,4 +3,5 @@ go 1.22.0
 use (
 	./sesi_1
 	./sesi_2
+	./sesi_3
 )

@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 /* struct
 type Employee struct {
 	name string
@@ -154,6 +150,7 @@ func main() {
 
 */
 
+/* struct slice of anonymus struct
 type Person struct {
 	name string
 	age  int
@@ -173,3 +170,4 @@ func main() {
 		fmt.Printf("%+v\n", v)
 	}
 }
+*/
