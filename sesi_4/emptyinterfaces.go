@@ -19,6 +19,7 @@ func main() {
 	fmt.Println("value of random: %v\n", randomvalues)
 }
 */
+
 func main() {
 	var v interface{}
 
