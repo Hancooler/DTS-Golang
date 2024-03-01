@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 /* closure declare closure in variable
 func main() {
 
@@ -71,7 +67,7 @@ func findtudent(students []string) func(string) string {
 	}
 }
 */
-
+/* callback
 func main() {
 	var numbers = []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 
@@ -92,3 +88,4 @@ func findOddNumbers(numbers []int, filter func(int) bool) int {
 	}
 	return totalOddNumbers
 }
+*/
