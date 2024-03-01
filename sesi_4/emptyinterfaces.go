@@ -20,6 +20,7 @@ func main() {
 }
 */
 
+/*emptyinterface assertion
 func main() {
 	var v interface{}
 
@@ -28,4 +29,15 @@ func main() {
 		v = value * 9
 
 	}
+}
+*/
+
+func main() {
+	rs := []interface{}{1, "airel", true, 2, "nanda"}
+	rm := map[string]interface{}{
+		"name":   "aril",
+		"status": true,
+		"age":    23,
+	}
+	_, _ = rs, rm
 }
