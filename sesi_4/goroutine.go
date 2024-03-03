@@ -1,10 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"runtime"
-)
-
 /* goroutine
 func main() {
 	go goroutine()
@@ -15,6 +10,7 @@ func goroutine() {
 }
 */
 
+/* goroutine asynchronus pprosess 1
 func main() {
 	fmt.Println("main execution started")
 	go firstProcess(8)
@@ -43,3 +39,4 @@ func secondProcess(index int) {
 
 	fmt.Println("second process ended")
 }
+*/
