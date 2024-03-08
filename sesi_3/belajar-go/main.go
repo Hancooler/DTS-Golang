@@ -1,6 +1,6 @@
 package main
 
-import "d:/31.learn/GO/DTS-Golang/sesi_3/belajar-go/helpers"
+import "belajar-go/helpers"
 
 func main() {
 	helpers.Greet()
