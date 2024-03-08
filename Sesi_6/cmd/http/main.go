@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/google/uuid"
 )
 
 func main() {
@@ -12,7 +14,7 @@ func main() {
 
 	})
 
-	fmt.Println("server is runnung on port 5000")
+	fmt.Println("server is running on port 5000")
 
 	http.HandleFunc("/employee", getEmployee)
 	http.HandleFunc("/employee/create", createEmployee)
@@ -21,16 +23,16 @@ func main() {
 }
 
 type Employee struct {
-	ID       int    `json:"id"`
+	ID       string `json:"id"`
 	Name     string `json:"name"`
 	Age      int    `json:"age"`
 	Division string `json:"division"`
 }
 
 var employees = []Employee{
-	{ID: 1, Name: "aril", Age: 23, Division: "curriculum developer"},
-	{ID: 2, Name: "nanda", Age: 23, Division: "finance"},
-	{ID: 3, Name: "mail", Age: 23, Division: "marketing"},
+	{ID: "4ad5ccd2-560c-497d-ad54-9905958e7113", Name: "aril", Age: 23, Division: "curriculum developer"},
+	{ID: "de3ecd37-1f20-42f2-942c-d900af5fce47", Name: "nanda", Age: 23, Division: "finance"},
+	{ID: "c3b4f582-202c-47a1-b42c-991fc0db4f50", Name: "mail", Age: 23, Division: "marketing"},
 }
 
 func getEmployee(w http.ResponseWriter, r *http.Request) {
@@ -59,7 +61,13 @@ func createEmployee(w http.ResponseWriter, r *http.Request) {
 
 	var employee Employee
 	json.NewDecoder(r.Body).Decode(&employee)
+
+	newUUID := uuid.New()
+
+	employee.ID = newUUID.String()
+
 	employees = append(employees, employee)
+
 	json.NewEncoder(w).Encode(employee)
 
 }
