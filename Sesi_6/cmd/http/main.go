@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"net/http"
 
 	"github.com/google/uuid"
@@ -11,6 +12,7 @@ import (
 func main() {
 	fmt.Println("server is running on port 5000")
 
+	http.HandleFunc("/employee", getEmployeeListHtml)
 	http.HandleFunc("/api/employee", getEmployeeList)
 	http.HandleFunc("/employee/create", createEmployee)
 	http.HandleFunc("/employee/find", getEmployee)
@@ -43,6 +45,27 @@ func getEmployeeList(w http.ResponseWriter, r *http.Request) {
 	// set Status to 200 (ok)
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(employees)
+}
+
+func getEmployeeListHtml(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method != "GET" {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// set header to return json
+	w.Header().Set("Content-Type", "text/html")
+	// set Status to 200 (ok)
+	w.WriteHeader(http.StatusOK)
+
+	tpl, err := template.ParseFiles("./template.html")
+
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	tpl.Execute(w, employees)
 }
 
 func createEmployee(w http.ResponseWriter, r *http.Request) {
@@ -91,18 +114,4 @@ func getEmployee(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(employeeData)
-}
-
-func getEmployeeListHTML(w http.ResponseWriter, r *http.Request) {
-
-	if r.Method != "GET" {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
-		return
-	}
-
-	// set header to return json
-	w.Header().Set("Content-Type", "application/json")
-	// set Status to 200 (ok)
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(employees)
 }
