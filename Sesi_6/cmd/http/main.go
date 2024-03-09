@@ -11,7 +11,7 @@ import (
 func main() {
 	fmt.Println("server is running on port 5000")
 
-	http.HandleFunc("/employee", getEmployeeList)
+	http.HandleFunc("/api/employee", getEmployeeList)
 	http.HandleFunc("/employee/create", createEmployee)
 	http.HandleFunc("/employee/find", getEmployee)
 
@@ -37,6 +37,7 @@ func getEmployeeList(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
 	}
+
 	// set header to return json
 	w.Header().Set("Content-Type", "application/json")
 	// set Status to 200 (ok)
@@ -90,4 +91,18 @@ func getEmployee(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(employeeData)
+}
+
+func getEmployeeListHTML(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method != "GET" {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// set header to return json
+	w.Header().Set("Content-Type", "application/json")
+	// set Status to 200 (ok)
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(employees)
 }
