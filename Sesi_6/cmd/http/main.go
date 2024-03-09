@@ -9,15 +9,11 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello World"))
-
-	})
-
 	fmt.Println("server is running on port 5000")
 
-	http.HandleFunc("/employee", getEmployee)
+	http.HandleFunc("/employee", getEmployeeList)
 	http.HandleFunc("/employee/create", createEmployee)
+	http.HandleFunc("/employee/find", getEmployee)
 
 	http.ListenAndServe(":5000", nil)
 }
@@ -35,7 +31,7 @@ var employees = []Employee{
 	{ID: "c3b4f582-202c-47a1-b42c-991fc0db4f50", Name: "mail", Age: 23, Division: "marketing"},
 }
 
-func getEmployee(w http.ResponseWriter, r *http.Request) {
+func getEmployeeList(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method != "GET" {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -70,4 +66,28 @@ func createEmployee(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(employee)
 
+}
+
+func getEmployee(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+
+	}
+
+	id := r.URL.Query().Get("id")
+
+	var employeeData Employee
+
+	for _, employee := range employees {
+		if employee.ID == id {
+			employeeData = employee
+
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(employeeData)
 }
