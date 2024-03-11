@@ -16,6 +16,7 @@ func main() {
 		api := r.Group("/api")
 		employee := api.Group("/employees")
 		employee.GET("", controller.GetEmployeeList)
+		employee.POST("", controller.CreateEmployee)
 		return r
 	}().Run(port)
 }

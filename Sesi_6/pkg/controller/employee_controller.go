@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type Employee struct {
@@ -19,6 +20,38 @@ var employees = []Employee{
 	{ID: "c3b4f582-202c-47a1-b42c-991fc0db4f50", Name: "mail", Age: 23, Division: "marketing"},
 }
 
+type EmployeeController struct {
+}
+
+func (c *EmployeeController) Routes(ctx *gin.RoutesGroup) {
+	routeGroup := ctx.Group("/employees")
+
+	routeGroup.GET("", GetEmployeeList)
+	routeGroup.POST("", CreateEmployee)
+}
+
 func GetEmployeeList(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, employees)
+}
+
+func CreateEmployee(ctx *gin.Context) {
+	var employee Employee
+
+	err := ctx.ShouldBindJSON(&employee)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+
+	}
+
+	employees = append(employees, employee)
+
+	newUUID := uuid.New()
+
+	employee.ID = newUUID.String()
+
+	employees = append(employees, employee)
+
+	ctx.JSON(http.StatusCreated, employee)
 }

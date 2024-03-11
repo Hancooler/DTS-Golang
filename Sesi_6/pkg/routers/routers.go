@@ -15,8 +15,7 @@ func Startserver(port string) *gin.Engine {
 
 	api := r.Group("/api")
 
-	employee := api.Group("/employees")
-	employee.GET("", controller.GetEmployeeList)
-
+	employeeController := controller.EmployeeController{}
+	employeeController.Routes(api)
 	return r
 }
