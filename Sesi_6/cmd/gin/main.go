@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	port := ":5000"
+	port := `:5000`
 	func() *gin.Engine {
 		r := gin.Default()
 		r.GET("/", func(c *gin.Context) {
