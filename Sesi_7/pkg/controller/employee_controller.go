@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 
+	//"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
@@ -23,7 +24,7 @@ var employees = []Employee{
 type EmployeeController struct {
 }
 
-func (c *EmployeeController) Routes(ctx *gin.RoutesGroup) {
+func (e EmployeeController) Routes(ctx *gin.RoutesGroup) {
 	routeGroup := ctx.Group("/employees")
 
 	routeGroup.GET("", GetEmployeeList)
