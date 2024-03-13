@@ -9,14 +9,13 @@ type ItemFormatted struct {
 }
 
 func ItemFormatter(item Item) ItemFormatted {
-	itemFormatted := ItemFormatted{
-		ID:          item.ID,
-		ItemCode:    item.ItemCode,
-		Description: item.Description,
-		Quantity:    item.Quantity,
-		OrderId:     item.OrderId,
+	type Item struct {
+		ItemCode    string
+		Quantity    int
+		Description string
+		OrderId     int // Assuming OrderId is of type int
 	}
-
+	itemFormatted := ItemFormatted{}
 	return itemFormatted
 }
 

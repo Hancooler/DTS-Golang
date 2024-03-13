@@ -1,6 +1,6 @@
 package item
 
-type Item struct {
+type item struct {
 	ID          int
 	ItemCode    string
 	Description string

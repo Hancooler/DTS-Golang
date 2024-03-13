@@ -7,63 +7,73 @@ import (
 
 const (
 	addNewItemQuery = `
- 		INSERT INTO items
- 		(
-			itemCode,
-			description,
-			quantity,
- 			orderId
-		)
-		VALUES($1, $2, $3, $4)
+		INSERT INTO items (item_code, description, quantity, order_id)
+		VALUES ($1, $2, $3, $4)
 		RETURNING id, item_code, description, quantity, order_id;
 	`
+	retrieveAllItemsQuery = `
+		SELECT id, item_code, description, quantity, order_id
+		FROM items;
+	`
 )
+
+// Item represents a single item in the database
+type Item struct {
+	ID          int64  `json:"id"`
+	ItemCode    string `json:"item_code"`
+	Description string `json:"description"`
+	Quantity    int    `json:"quantity"`
+	OrderID     int64  `json:"order_id"`
+}
+
+// Repository defines the interface for interacting with items
+type Repository interface {
+	Create(item Item) (Item, error)
+	GetAllItems() ([]Item, error)
+}
 
 type itemPG struct {
 	db *sql.DB
 }
 
-func NewItemPG(db *sql.DB) *Repository {
+// NewItemPG creates a new item repository instance
+func NewItemPG(db *sql.DB) Repository {
 	return &itemPG{
 		db: db,
 	}
 }
 
+// Create inserts a new item into the database
 func (m *itemPG) Create(item Item) (Item, error) {
-	var Items Item
+	row := m.db.QueryRow(addNewItemQuery,
+		item.ItemCode, item.Description, item.Quantity, item.OrderID)
 
-	row := m.db.QueryRow(addNewItemQuery, item.ItemCode, item.Description, item.Quantity, item.OrderId)
-
-	err := row.Scan(ID, ItemCode, Description, Quantity, OrderId)
+	var newItem Item
+	err := row.Scan(&newItem.ID, &newItem.ItemCode, &newItem.Description, &newItem.Quantity, &newItem.OrderID)
 
 	if err != nil {
-
-		return nil, err
+		return Item{}, fmt.Errorf("error creating item: %w", err)
 	}
 
-	return &Items, nil
+	return newItem, nil
 }
-func (m *itemPG) GetAllItems() ([]*entity.Item, error) {
-	var items = []*entity.Item{}
 
+// GetAllItems retrieves all items from the database
+func (m *itemPG) GetAllItems() ([]Item, error) {
 	rows, err := m.db.Query(retrieveAllItemsQuery)
-
 	if err != nil {
-		fmt.Println("err querying items", err.Error())
-		return nil, err
+		return nil, fmt.Errorf("error querying items: %w", err)
 	}
+	defer rows.Close() // Ensure rows are closed even in case of errors
 
+	var items []Item
 	for rows.Next() {
-		var item entity.Item
-
-		err = rows.Scan(&item.ItemId, &item.ItemCode, &item.Description, &item.Quantity, &item.OrderId)
-
+		var item Item
+		err := rows.Scan(&item.ID, &item.ItemCode, &item.Description, &item.Quantity, &item.OrderID)
 		if err != nil {
-			fmt.Println("err scanning items", err.Error())
-			return nil, err
+			return nil, fmt.Errorf("error scanning items: %w", err)
 		}
-
-		items = append(items, &item)
+		items = append(items, item)
 	}
 
 	return items, nil
