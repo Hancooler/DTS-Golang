@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = true
+	ignorecase = true
+	longpaths = true
+[remote "origin"]
+	url = https://github.com/lib/pqgo
+	fetch = +refs/heads/*:refs/remotes/origin/*
