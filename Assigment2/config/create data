@@ -1,0 +1,24 @@
+Create tabel product(
+	kode_product varchar(10),not null primary key,
+	nama_product varchar(200), not null
+	stok smallint,
+	harga integer
+
+);
+
+Create tabel orders(
+	id_order serial primary key,
+	tanggal_order timestamp,
+	payment_method varchar(100),
+	total integer
+);
+
+Create tabel order_detail(
+	id_order_detail serial primary key not null,
+	id_order integer not null,
+	kode_product varchar(10) not null,
+	qty smallint,
+
+	Constraint id_order foreign key(id_order) references orders(id_order) on update cascade on delete cascade restrict,
+	Constraint kode_product foreign key(kode_product) references product(kode_product) on update cascade on delete cascade restrict
+);

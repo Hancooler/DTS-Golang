@@ -1,0 +1,11 @@
+- data produk
+{Kode Produk: 001, Nama Produk: somay, Stok: 100, Harga : 2000}
+{Kode Produk: 002, Nama Produk: bakso, Stok: 100, Harga : 2000}
+
+
+-order
+{Tanggal Order: Now, Payment Method : Cash, Total : 30.000}
+
+- Order details
+{IdOrder : Id Order, Kode Produk: 001, Qty :10}
+{IdOrder : Id Order, Kode Produk: 002, Qty :10}
