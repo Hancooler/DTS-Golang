@@ -17,10 +17,10 @@ type Orders struct {
 }
 
 type OrderDetails struct {
-	Idorderdetail       int     `gorm:"column:id_order_detail;primary_key:auto_increment"`
-	OrdersIdOrder       int     `gorm:"column:id_order"`
-	Orders              Orders  `gorm:"foreignKey:OrdersIdOrder"`
-	ProductsKodeproduct string  `gorm:"column:kode_product"`
-	Product             Product `gorm:"foreignKey:ProductsKodeproduct"`
-	Qty                 int     `gorm:"column:qty"`
+	Idorderdetail       int      `gorm:"column:id_order_detail;primary_key:auto_increment"`
+	OrdersIdOrder       int      `gorm:"column:id_order"`
+	Orders              Orders   `gorm:"foreignKey:OrdersIdOrder"`
+	ProductsKodeproduct string   `gorm:"column:kode_product"`
+	Product             Products `gorm:"foreignKey:ProductsKodeproduct"`
+	Qty                 int      `gorm:"column:qty"`
 }

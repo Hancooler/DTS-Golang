@@ -21,8 +21,8 @@ func main() {
 	crud_product.InsertProduct(config.DB, &product)
 
 	product := entity.Products{
-		KodeProduk: "002",
-		NamaProduk: "bakso",
+		Kodeproduk: "002",
+		Namaproduk: "bakso",
 		Stok:       "100",
 		Harga:      `2000`,
 	}
