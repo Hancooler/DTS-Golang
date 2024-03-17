@@ -12,7 +12,7 @@ import (
 var (
 	host     = "localhost"
 	User     = "postgres"
-	password = "postgres"
+	password = "1"
 	dbPort   = "5432"
 	dbname   = "simple-api"
 	db       *gorm.DB

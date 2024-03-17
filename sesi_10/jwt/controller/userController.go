@@ -16,7 +16,7 @@ var (
 func UserRegister(c *gin.Context) {
 	db := database.GetDB()
 
-	contentType := helpers.GetContentType(c)
+	contentType := helpers.GenerateFromPassword(c)
 	_, _ = db, contentType
 	User := models.User{}
 
@@ -41,4 +41,10 @@ func UserRegister(c *gin.Context) {
 		"full_name": User.FullName,
 	})
 
+}
+
+func UserLogin(c *gin.Context) {
+	//db := database.GetDB()
+
+	c.JSON(http.StatusOK, "Hello World")
 }
