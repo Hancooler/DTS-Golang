@@ -1,16 +1,20 @@
 package service
 
 import (
-	"sesi_11/mock/entity"
-	"sesi_11/mock/repository"
+	"mock/entity"
+	"mock/repository"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
 
-var productRepository = &repository.ProductRepositoryMock{Mock: mock.Mock{}}
+type ProductRepositoryMock struct {
+	mock.Mock
+}
+
 var productService = ProductService{Repository: productRepository}
+var productRepository = &repository.ProductRepositoryMock{Mock: mock.Mock{}}
 
 func TestProductServiceGetOneProductNotFound(t *testing.T) {
 	// Prepare the mock behavior

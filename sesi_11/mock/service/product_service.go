@@ -2,8 +2,8 @@ package service
 
 import (
 	"errors"
-	"sesi_11/mock/entity"
-	"sesi_11/mock/repository"
+	"mock/entity"
+	"mock/repository"
 )
 
 // ProductService handles product-related operations

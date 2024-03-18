@@ -1,6 +1,6 @@
 package repository
 
-import "sesi_11/mock/entity"
+import "mock/entity"
 
 // ProductRepository represents an interface for product data access
 type ProductRepository interface {
