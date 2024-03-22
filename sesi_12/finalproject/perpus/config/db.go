@@ -22,4 +22,5 @@ func main() {
 	db.AutoMigrate(&models.Book{}, &models.Borrowing{}, &models.Member{}, &models.Petugas{})
 
 	// Use db to perform operations...
+
 }
