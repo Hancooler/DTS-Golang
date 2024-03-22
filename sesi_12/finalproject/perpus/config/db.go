@@ -12,7 +12,7 @@ func ConnectDB() (*gorm.DB, error) {
 	return gorm.Open(postgres.Open(dsn), &gorm.Config{})
 }
 func main() {
-	// Establish database connection
+	// database connection
 	db, err := ConnectDB()
 	if err != nil {
 		panic("failed to connect database")
@@ -21,6 +21,11 @@ func main() {
 	// Migrate the schema
 	db.AutoMigrate(&models.Book{}, &models.Borrowing{}, &models.Member{}, &models.Petugas{})
 
-	// Use db to perform operations...
+}
 
+func MigrateDB(db *gorm.DB) {
+	db.AutoMigrate(&models.Book{})
+	db.AutoMigrate(&models.Borrowing{})
+	db.AutoMigrate(&models.Member{})
+	db.AutoMigrate(&models.Petugas{})
 }
